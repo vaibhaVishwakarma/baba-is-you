@@ -26,6 +26,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       with:
+        fetch-depth: 0
         submodules: true
     - name: Setup Python
       uses: actions/setup-python@v5
@@ -48,5 +49,16 @@ jobs:
       run: cd build && make
     - name: Run Unit Test
       run: /home/runner/work/baba-is-auto/baba-is-auto/build/bin/UnitTests
+    - name: Collect coverage report
+      run: |
+        lcov --directory build --capture --output-file build/coverage.info
+        lcov --remove build/coverage.info '/usr/*' '*/Tests/*' '*/build/*' --output-file build/coverage.info.cleaned
     - name: Upload coverage to Codecov
-      run: bash <(curl -s https://codecov.io/bash)
+      uses: codecov/codecov-action@v5
+      with:
+        fail_ci_if_error: true
+        files: ./build/coverage.info.cleaned
+        flags: unittests
+        name: ubuntu-codecov
+        token: ${{ secrets.CODECOV_TOKEN }}
+        verbose: true
