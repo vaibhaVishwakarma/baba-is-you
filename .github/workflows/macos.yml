@@ -6,49 +6,51 @@ on:
   pull_request:
     branches: [ main ]
 
+env:
+  PYTHON_VERSION: '3.12'
+
 jobs:
   build-macos:
     strategy:
       matrix:
         include:
-          # macOS 12.6.5 + Xcode 14.2
-          - name: "macOS 12.6.5 + Xcode 14.2"
-            os: macos-12
+          # macOS 26.3 + Xcode 26.3
+          - name: "macOS 26.3 + Xcode 26.3"
+            os: macos-26
             compiler: xcode
-            version: "14.2"
-          # macOS 12.6.5 + Xcode 13.4.1
-          - name: "macOS 12.6.5 + Xcode 13.4.1"
-            os: macos-12
+            version: "26.3"
+          # macOS 15.7.4 + Xcode 16.4
+          - name: "macOS 15.7.4 + Xcode 16.4"
+            os: macos-15
             compiler: xcode
-            version: "13.4.1"
-          # macOS 11.7.6 + Xcode 12.5.1
-          - name: "macOS 11.7.6 + Xcode 12.5.1"
-            os: macos-11
-            compiler: xcode
-            version: "12.5.1"
-          # macOS 12.6.5 + gcc-12
-          - name: "macOS 12.6.5 + gcc-12"
-            os: macos-12
+            version: "16.4"
+          # macOS 26.3 + gcc-15
+          - name: "macOS 26.3 + gcc-15"
+            os: macos-26
             compiler: gcc
-            version: "12"
-          # macOS 12.6.5 + gcc-11
-          - name: "macOS 12.6.5 + gcc-11"
-            os: macos-12
+            version: "15"
+          # macOS 26.3 + gcc-14
+          - name: "macOS 26.3 + gcc-14"
+            os: macos-26
             compiler: gcc
-            version: "11"
-          # macOS 11.7.6 + gcc-10
-          - name: "macOS 11.7.6 + gcc-10"
-            os: macos-11
+            version: "14"
+          # macOS 26.3 + gcc-13
+          - name: "macOS 26.3 + gcc-13"
+            os: macos-26
             compiler: gcc
-            version: "10"
+            version: "13"
 
     runs-on: ${{ matrix.os }}
     name: 🍎 Build - ${{ matrix.name }}
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v4
       with:
         submodules: true
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
     - name: Configure Compiler
       run: |
         if [ "${{ matrix.compiler }}" = "gcc" ]; then
@@ -68,6 +70,7 @@ jobs:
       run: /Users/runner/work/baba-is-auto/baba-is-auto/build/bin/UnitTests
     - name: Run Python Test
       run: |
-        pip3 install -r requirements.txt
-        pip3 install .
-        python3 -m pytest Tests/PythonTests/
+        python -m pip install --upgrade pip
+        python -m pip install -r requirements.txt
+        python -m pip install .
+        python -m pytest Tests/PythonTests/
