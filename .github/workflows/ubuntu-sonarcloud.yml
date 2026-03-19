@@ -24,9 +24,9 @@ jobs:
         submodules: true
     - name: Prepare Sonar scanner
       run: |
-        wget -nv https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
-        unzip -q sonar-scanner-cli-4.7.0.2747-linux.zip
-        echo "${PWD}/sonar-scanner-4.7.0.2747-linux/bin/" >> $GITHUB_PATH
+        wget -nv https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-8.0.1.6346-linux-x64.zip
+        unzip -q sonar-scanner-cli-8.0.1.6346-linux-x64.zip
+        echo "${PWD}/sonar-scanner-cli-8.0.1.6346-linux-x64/bin/" >> $GITHUB_PATH
         wget -nv https://sonarcloud.io/static/cpp/build-wrapper-linux-x86.zip
         unzip -q build-wrapper-linux-x86.zip
         echo "${PWD}/build-wrapper-linux-x86" >> $GITHUB_PATH
