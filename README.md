@@ -122,7 +122,7 @@ I would like to thank [Arvi "Hempuli" Teikari](https://hempuli.com/) for allowin
 
 ## License
 
-<img align="right" src="http://opensource.org/trademarks/opensource/OSI-Approved-License-100x137.png">
+<img align="right" src="https://149753425.v2.pressablecdn.com/wp-content/uploads/2009/06/OSIApproved_100X125.png">
 
 The class is licensed under the [MIT License](http://opensource.org/licenses/MIT):
 
