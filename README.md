@@ -10,8 +10,14 @@
 [![codecov](https://codecov.io/gh/utilForever/baba-is-auto/branch/main/graph/badge.svg)](https://codecov.io/gh/utilForever/baba-is-auto)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/2b31a40d9ea24ae9949289360298404e)](https://www.codacy.com/manual/utilForever/baba-is-auto?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=utilForever/baba-is-auto&amp;utm_campaign=Badge_Grade)
 [![CodeFactor](https://www.codefactor.io/repository/github/utilforever/baba-is-auto/badge)](https://www.codefactor.io/repository/github/utilforever/baba-is-auto)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=utilForever_baba-is-auto&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=utilForever_baba-is-auto)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=utilForever_baba-is-auto&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=utilForever_baba-is-auto)
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=baba-is-auto&metric=alert_status)](https://sonarcloud.io/dashboard?id=baba-is-auto) [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=baba-is-auto&metric=ncloc)](https://sonarcloud.io/dashboard?id=baba-is-auto) [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=baba-is-auto&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=baba-is-auto) [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=baba-is-auto&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=baba-is-auto) [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=baba-is-auto&metric=security_rating)](https://sonarcloud.io/dashboard?id=baba-is-auto)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=utilForever_baba-is-auto&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=utilForever_baba-is-auto)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=utilForever_baba-is-auto&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=utilForever_baba-is-auto)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=utilForever_baba-is-auto&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=utilForever_baba-is-auto)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=utilForever_baba-is-auto&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=utilForever_baba-is-auto)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=utilForever_baba-is-auto&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=utilForever_baba-is-auto)
 
 baba-is-auto is Baba Is You simulator using C++ with some reinforcement learning. The code is built on C++17 and can be compiled with commonly available compilers such as g++, clang++, or Microsoft Visual Studio. baba-is-auto currently supports macOS (10.14 or later), Ubuntu (18.04 or later), Windows (Visual Studio 2017 or later), and Windows Subsystem for Linux (WSL). Other untested platforms that support C++17 also should be able to build baba-is-auto.
 
@@ -122,11 +128,11 @@ I would like to thank [Arvi "Hempuli" Teikari](https://hempuli.com/) for allowin
 
 ## License
 
-<img align="right" src="http://opensource.org/trademarks/opensource/OSI-Approved-License-100x137.png">
+<img align="right" src="https://149753425.v2.pressablecdn.com/wp-content/uploads/2009/06/OSIApproved_100X125.png">
 
 The class is licensed under the [MIT License](http://opensource.org/licenses/MIT):
 
-Copyright &copy; 2020-2023 [Chris Ohk](http://www.github.com/utilForever).
+Copyright &copy; 2020-2026 [Chris Ohk](http://www.github.com/utilForever).
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
