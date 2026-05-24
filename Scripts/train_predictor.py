@@ -11,8 +11,6 @@ _ROOT = Path(__file__).resolve().parents[1]
 if str(_ROOT) not in sys.path:
     sys.path.insert(0, str(_ROOT))
 
-import baba_graph
-
 from baba_graph.device import (
     configure_cuda_training,
     resolve_amp,
@@ -58,7 +56,6 @@ def main() -> int:
         f"Using device: {device}  amp={use_amp}  grad_accum={grad_accum}",
         flush=True,
     )
-    print(f"baba_graph: {baba_graph.__file__}", flush=True)
 
     quantizer = None
     if args.vq_checkpoint:

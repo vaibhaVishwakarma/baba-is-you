@@ -112,7 +112,8 @@ class PhysicalGraphMPNN(nn.Module):
 
         node_rule = gather_node_rule_context(rule_embeddings, physical_token_ids)
 
-        act = action_tensor(action, self.action_emb.weight)
+        dev = x.device
+        act = action_tensor(action, dev)
         a = self.action_emb(act.view(-1)[0])
         n = x.size(0)
         action_broadcast = a.unsqueeze(0).expand(n, -1)
@@ -204,7 +205,7 @@ class DualGraphWorldModel(nn.Module):
 def snapshot_to_tensors(
     snap: PerceptionSnapshot,
     *,
-    device: str | torch.device = "cpu",
+    device: str = "cpu",
     codebook_size: int | None = None,
     quantizer=None,
     use_vq: bool = False,

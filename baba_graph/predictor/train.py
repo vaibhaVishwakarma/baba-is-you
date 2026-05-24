@@ -9,12 +9,7 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 
-from baba_graph.device import (
-    action_tensor,
-    is_cuda_device,
-    module_device,
-    snap_tensors_to_device,
-)
+from baba_graph.device import action_tensor, is_cuda_device, module_device
 from baba_graph.predictor.align import align_nodes_hungarian
 from baba_graph.predictor.model import BabaTransitionModel
 from baba_graph.predictor.movement import movement_labels_for_pairs
@@ -39,6 +34,17 @@ def _autocast_ctx(device: str, use_amp: bool):
     return nullcontext()
 
 
+def _gather_token_ids(
+    tokens: np.ndarray | torch.Tensor,
+    indices: torch.Tensor,
+    device: torch.device,
+) -> torch.Tensor:
+    """Index token ids on ``device``; safe when ``indices`` is CUDA."""
+    if isinstance(tokens, torch.Tensor):
+        return tokens.to(device=device, dtype=torch.long)[indices]
+    return torch.as_tensor(tokens, device=device, dtype=torch.long)[indices]
+
+
 def transition_loss(
     model: BabaTransitionModel,
     transition: DynamicsTransition,
@@ -51,14 +57,11 @@ def transition_loss(
     dev = module_device(model)
     device_str = str(dev)
     cb = model.world_config.codebook_size
-    s = snap_tensors_to_device(
-        snapshot_to_tensors(
-            transition.state,
-            device=dev,
-            codebook_size=cb,
-            quantizer=quantizer,
-        ),
-        dev,
+    s = snapshot_to_tensors(
+        transition.state,
+        device=device_str,
+        codebook_size=cb,
+        quantizer=quantizer,
     )
     _, next_phys_tok = snapshot_token_ids(
         transition.next_state,
@@ -88,7 +91,7 @@ def transition_loss(
         next_idx = torch.tensor([p[1] for p in pairs], device=dev, dtype=torch.long)
 
         id_logits = out.identity_logits[prev_idx]
-        id_targets = torch.from_numpy(next_phys_tok[next_idx]).long().to(dev)
+        id_targets = _gather_token_ids(next_phys_tok, next_idx, dev)
         loss_id = F.cross_entropy(
             id_logits,
             id_targets,

@@ -1,3 +1,15 @@
+# CMake temp/cache files
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Testing
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+build
+
 # Visual Studio files
 /.vs
 
@@ -7,3 +19,18 @@
 
 # OSX files
 .DS_Store
+
+# CLion files
+/.idea
+cmake-build-debug
+
+# vi files
+.clang_complete
+.syntastic_cpp_config
+
+# Python files
+*.pyc
+/.pytest_cache
+
+# RL files
+events.out.tfevents.*

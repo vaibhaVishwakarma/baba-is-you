@@ -97,30 +97,3 @@ def action_tensor(
     if isinstance(action, torch.Tensor):
         return action.detach().long().to(dev).reshape(())
     return torch.tensor(int(action), dtype=torch.long, device=dev)
-
-
-_SNAPSHOT_TENSOR_KEYS = (
-    "text_x",
-    "text_edge_index",
-    "text_token_ids",
-    "text_node_mask",
-    "physical_x",
-    "physical_edge_index",
-    "physical_token_ids",
-    "physical_node_mask",
-    "codebook_size",
-)
-
-
-def snap_tensors_to_device(
-    snap_tensors: dict,
-    device: str | torch.device | torch.nn.Module | torch.Tensor,
-) -> dict:
-    """Move all tensor entries in a snapshot dict onto ``device`` (in-place copy)."""
-    dev = resolve_reference_device(device)
-    out = dict(snap_tensors)
-    for key in _SNAPSHOT_TENSOR_KEYS:
-        val = out.get(key)
-        if isinstance(val, torch.Tensor) and val.device != dev:
-            out[key] = val.to(dev, non_blocking=(dev.type == "cuda"))
-    return out
