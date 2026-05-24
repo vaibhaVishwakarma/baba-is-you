@@ -11,7 +11,12 @@ _ROOT = Path(__file__).resolve().parents[1]
 if str(_ROOT) not in sys.path:
     sys.path.insert(0, str(_ROOT))
 
-from baba_graph.device import resolve_device
+from baba_graph.device import (
+    configure_cuda_training,
+    resolve_amp,
+    resolve_device,
+    t4_vq_batch_size,
+)
 from baba_graph.vq.config import VQConfig
 from baba_graph.vq.train import collect_and_train, save_quantizer
 
@@ -20,7 +25,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Train VQ bottleneck (Phase 2)")
     parser.add_argument("--maps", nargs="*", default=["baba_is_you"])
     parser.add_argument("--epochs", type=int, default=30)
-    parser.add_argument("--batch-size", type=int, default=256)
+    parser.add_argument("--batch-size", type=int, default=None)
     parser.add_argument("--episodes", type=int, default=50)
     parser.add_argument("--max-steps", type=int, default=100)
     parser.add_argument("--num-codes", type=int, default=512)
@@ -39,7 +44,10 @@ def main() -> int:
     )
     args = parser.parse_args()
     device = resolve_device(args.device)
-    print(f"Using device: {device}", flush=True)
+    configure_cuda_training(device)
+    use_amp = resolve_amp(args.amp, device)
+    batch_size = t4_vq_batch_size(device, args.batch_size)
+    print(f"Using device: {device}  amp={use_amp}  batch_size={batch_size}", flush=True)
 
     vq_cfg = VQConfig(num_codes=args.num_codes, max_codes=args.max_codes)
 
@@ -48,11 +56,12 @@ def main() -> int:
         maps=args.maps,
         vq_config=vq_cfg,
         epochs=args.epochs,
-        batch_size=args.batch_size,
+        batch_size=batch_size,
         episodes_per_map=args.episodes,
         max_steps=args.max_steps,
         policy=args.policy,
         device=device,
+        use_amp=use_amp,
     )
     print(f"Collected {len(data)} visual vectors (dim={data.vectors.shape[1]})", flush=True)
 

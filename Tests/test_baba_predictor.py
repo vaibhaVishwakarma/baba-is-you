@@ -35,6 +35,22 @@ def test_dual_head_shapes():
     assert out.movement_logits.shape == (snap.num_physical, 5)
 
 
+def test_forward_cuda_action_on_same_device():
+    if not torch.cuda.is_available():
+        pytest.skip("cuda not available")
+    game = pyBaba.Game(str(map_path(MAP)))
+    game.Reset()
+    snap = extract_perception_from_game(game, calibrate_classifier=False)
+    model = BabaTransitionModel(
+        WorldModelConfig(hidden_dim=32, codebook_size=64, rule_layers=1, physical_layers=1),
+        PredictorConfig(codebook_size=64),
+    ).cuda()
+    t = snapshot_to_tensors(snap, device="cuda", codebook_size=64)
+    out = model(t, 0)
+    assert out.identity_logits.device.type == "cuda"
+    assert out.movement_logits.device.type == "cuda"
+
+
 def test_movement_label_cardinal():
     import pyBaba
     from baba_graph.types import ObjectNode
@@ -53,6 +69,22 @@ def test_dual_loss_finite():
         PredictorConfig(codebook_size=128),
     )
     loss, metrics = transition_loss(model, tr[0])
+    assert torch.isfinite(loss)
+    assert metrics["num_pairs"] >= 0
+
+
+def test_transition_loss_cuda():
+    if not torch.cuda.is_available():
+        pytest.skip("cuda not available")
+    tr = collect_tokenized_transitions(MAP, episodes=1, max_steps=20, seed=0)
+    if not tr:
+        pytest.skip("no transitions")
+    model = BabaTransitionModel(
+        WorldModelConfig(hidden_dim=32, codebook_size=64, rule_layers=1, physical_layers=1),
+        PredictorConfig(codebook_size=64),
+    ).cuda()
+    loss, metrics = transition_loss(model, tr[0], device="cuda")
+    assert loss.device.type == "cuda"
     assert torch.isfinite(loss)
     assert metrics["num_pairs"] >= 0
 

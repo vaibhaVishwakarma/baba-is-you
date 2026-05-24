@@ -7,6 +7,7 @@ from dataclasses import dataclass
 import torch
 import torch.nn as nn
 
+from baba_graph.device import action_tensor, module_device
 from baba_graph.world_model.config import WorldModelConfig
 from baba_graph.world_model.data import DynamicsTransition
 from baba_graph.world_model.model import DualGraphWorldModel, snapshot_to_tensors
@@ -34,7 +35,7 @@ def contrastive_next_state_loss(
     cb = codebook_size or model.config.codebook_size
     s = snapshot_to_tensors(transition.state, device=device, codebook_size=cb)
     ns = snapshot_to_tensors(transition.next_state, device=device, codebook_size=cb)
-    out = model.from_snapshot_tensors(s, transition.action)
+    out = model.from_snapshot_tensors(s, action_tensor(transition.action, model))
     target = ns["physical_x"].detach()
     if target.numel() == 0 or out.physical_h.numel() == 0:
         return torch.tensor(0.0, device=device, requires_grad=True)

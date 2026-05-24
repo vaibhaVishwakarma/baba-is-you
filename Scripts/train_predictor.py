@@ -11,7 +11,12 @@ _ROOT = Path(__file__).resolve().parents[1]
 if str(_ROOT) not in sys.path:
     sys.path.insert(0, str(_ROOT))
 
-from baba_graph.device import resolve_device
+from baba_graph.device import (
+    configure_cuda_training,
+    resolve_amp,
+    resolve_device,
+    t4_grad_accum,
+)
 from baba_graph.predictor import BabaTransitionModel, PredictorConfig, train_predictor
 from baba_graph.predictor.data import collect_tokenized_transitions
 from baba_graph.vq.train import load_quantizer
@@ -31,9 +36,26 @@ def main() -> int:
         default="auto",
         help="auto | cpu | cuda (requires PyTorch built with CUDA)",
     )
+    parser.add_argument(
+        "--amp",
+        default="auto",
+        help="auto: fp16 on CUDA (T4-friendly) | true | false",
+    )
+    parser.add_argument(
+        "--grad-accum",
+        type=int,
+        default=None,
+        help="Gradient accumulation steps (default 8 on CUDA)",
+    )
     args = parser.parse_args()
     device = resolve_device(args.device)
-    print(f"Using device: {device}", flush=True)
+    configure_cuda_training(device)
+    use_amp = resolve_amp(args.amp, device)
+    grad_accum = t4_grad_accum(device, args.grad_accum)
+    print(
+        f"Using device: {device}  amp={use_amp}  grad_accum={grad_accum}",
+        flush=True,
+    )
 
     quantizer = None
     if args.vq_checkpoint:
@@ -61,6 +83,8 @@ def main() -> int:
         quantizer,
         epochs=args.epochs,
         device=device,
+        use_amp=use_amp,
+        grad_accum_steps=grad_accum,
     )
     if history:
         last = history[-1]

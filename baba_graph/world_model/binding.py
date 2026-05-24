@@ -262,5 +262,6 @@ def gather_node_rule_context(
     """Per-physical-node rule context: (N_phys, H)."""
     if physical_token_ids.numel() == 0:
         return torch.zeros(0, rule_embeddings.size(-1), device=rule_embeddings.device)
-    ids = physical_token_ids.long().clamp(0, rule_embeddings.size(0) - 1)
+    ids = physical_token_ids.long().to(rule_embeddings.device)
+    ids = ids.clamp(0, rule_embeddings.size(0) - 1)
     return rule_embeddings[ids]

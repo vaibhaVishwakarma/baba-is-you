@@ -9,6 +9,7 @@ import torch
 import torch.nn as nn
 
 from baba_graph.perception.types import PerceptionSnapshot
+from baba_graph.device import action_tensor, infer_device_from_tensors
 from baba_graph.world_model.binding import RuleBindingHead, gather_node_rule_context
 from baba_graph.world_model.config import WorldModelConfig
 from baba_graph.world_model.layers import MPNNLayer
@@ -111,9 +112,9 @@ class PhysicalGraphMPNN(nn.Module):
 
         node_rule = gather_node_rule_context(rule_embeddings, physical_token_ids)
 
-        if action.dim() == 0:
-            action = action.unsqueeze(0)
-        a = self.action_emb(action.long().view(-1)[0])
+        dev = x.device
+        act = action_tensor(action, dev)
+        a = self.action_emb(act.view(-1)[0])
         n = x.size(0)
         action_broadcast = a.unsqueeze(0).expand(n, -1)
         inp = torch.cat([x, action_broadcast, node_rule], dim=-1)
@@ -148,6 +149,9 @@ class DualGraphWorldModel(nn.Module):
         text_node_mask: torch.Tensor | None = None,
         physical_node_mask: torch.Tensor | None = None,
     ) -> WorldModelOutput:
+        action = action_tensor(
+            action, infer_device_from_tensors(physical_x, text_x)
+        )
         text_h, rule_embeddings = self.rule_encoder(
             text_x,
             text_edge_index,
@@ -178,8 +182,11 @@ class DualGraphWorldModel(nn.Module):
         snap_tensors: dict[str, torch.Tensor | list],
         action: int | torch.Tensor,
     ) -> WorldModelOutput:
-        if not isinstance(action, torch.Tensor):
-            action = torch.tensor(action, dtype=torch.long)
+        dev = infer_device_from_tensors(
+            snap_tensors["physical_x"],  # type: ignore[arg-type]
+            snap_tensors["text_x"],  # type: ignore[arg-type]
+        )
+        action = action_tensor(action, dev)
         return self.forward(
             snap_tensors["text_x"],  # type: ignore[arg-type]
             snap_tensors["text_edge_index"],  # type: ignore[arg-type]
