@@ -6,3 +6,14 @@ pyBaba.egg-info/SOURCES.txt
 pyBaba.egg-info/dependency_links.txt
 pyBaba.egg-info/not-zip-safe
 pyBaba.egg-info/top_level.txt
+tests/test_align_hungarian.py
+tests/test_baba_graph.py
+tests/test_baba_perception.py
+tests/test_baba_predictor.py
+tests/test_baba_vq.py
+tests/test_baba_world.py
+tests/test_baba_world_model.py
+tests/test_exploration.py
+tests/test_online_exploration.py
+tests/test_rule_binding_agg.py
+tests/test_visual_cache.py

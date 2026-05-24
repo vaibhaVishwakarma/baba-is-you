@@ -1,0 +1,15 @@
+C:/Users/vaibh/OneDrive/Documents/Functional/baba-is-you/baba-is-auto/build/temp.win-amd64-cpython-312/Release/CMakeFiles/INSTALL.dir
+C:/Users/vaibh/OneDrive/Documents/Functional/baba-is-you/baba-is-auto/build/temp.win-amd64-cpython-312/Release/CMakeFiles/ALL_BUILD.dir
+C:/Users/vaibh/OneDrive/Documents/Functional/baba-is-you/baba-is-auto/build/temp.win-amd64-cpython-312/Release/CMakeFiles/ZERO_CHECK.dir
+C:/Users/vaibh/OneDrive/Documents/Functional/baba-is-you/baba-is-auto/build/temp.win-amd64-cpython-312/Release/Libraries/doctest/CMakeFiles/doctest_with_main.dir
+C:/Users/vaibh/OneDrive/Documents/Functional/baba-is-you/baba-is-auto/build/temp.win-amd64-cpython-312/Release/Libraries/doctest/CMakeFiles/INSTALL.dir
+C:/Users/vaibh/OneDrive/Documents/Functional/baba-is-you/baba-is-auto/build/temp.win-amd64-cpython-312/Release/Libraries/doctest/CMakeFiles/ALL_BUILD.dir
+C:/Users/vaibh/OneDrive/Documents/Functional/baba-is-you/baba-is-auto/build/temp.win-amd64-cpython-312/Release/Sources/baba-is-auto/CMakeFiles/baba_is_auto_header_gen_py.dir
+C:/Users/vaibh/OneDrive/Documents/Functional/baba-is-you/baba-is-auto/build/temp.win-amd64-cpython-312/Release/Sources/baba-is-auto/CMakeFiles/baba-is-auto.dir
+C:/Users/vaibh/OneDrive/Documents/Functional/baba-is-you/baba-is-auto/build/temp.win-amd64-cpython-312/Release/Sources/baba-is-auto/CMakeFiles/INSTALL.dir
+C:/Users/vaibh/OneDrive/Documents/Functional/baba-is-you/baba-is-auto/build/temp.win-amd64-cpython-312/Release/Tests/UnitTests/CMakeFiles/UnitTests.dir
+C:/Users/vaibh/OneDrive/Documents/Functional/baba-is-you/baba-is-auto/build/temp.win-amd64-cpython-312/Release/Tests/UnitTests/CMakeFiles/INSTALL.dir
+C:/Users/vaibh/OneDrive/Documents/Functional/baba-is-you/baba-is-auto/build/temp.win-amd64-cpython-312/Release/Libraries/pybind11/CMakeFiles/INSTALL.dir
+C:/Users/vaibh/OneDrive/Documents/Functional/baba-is-you/baba-is-auto/build/temp.win-amd64-cpython-312/Release/Libraries/pybind11/CMakeFiles/ALL_BUILD.dir
+C:/Users/vaibh/OneDrive/Documents/Functional/baba-is-you/baba-is-auto/build/temp.win-amd64-cpython-312/Release/Extensions/BabaPython/CMakeFiles/pyBaba.dir
+C:/Users/vaibh/OneDrive/Documents/Functional/baba-is-you/baba-is-auto/build/temp.win-amd64-cpython-312/Release/Extensions/BabaPython/CMakeFiles/INSTALL.dir

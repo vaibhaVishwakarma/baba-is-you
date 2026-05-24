@@ -2324,3 +2324,197 @@ events:
         
       exitCode: 0
 ...
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindPython/Support.cmake:2563 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindPython.cmake:700 (include)"
+      - "Libraries/pybind11/tools/pybind11NewTools.cmake:54 (find_package)"
+      - "Libraries/pybind11/tools/pybind11Common.cmake:215 (include)"
+      - "Libraries/pybind11/CMakeLists.txt:298 (include)"
+    mode: "program"
+    variable: "_Python_EXECUTABLE_DEBUG"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "python3.15_d"
+      - "python3.14_d"
+      - "python3.13_d"
+      - "python3.12_d"
+      - "python3.11_d"
+      - "python3.10_d"
+      - "python3.9_d"
+      - "python3.8_d"
+      - "python3_d"
+      - "python_d"
+    candidate_directories:
+      - "C:/Users/vaibh/miniconda3/"
+    searched_directories:
+      - "C:/Users/vaibh/miniconda3/python3.15_d.com"
+      - "C:/Users/vaibh/miniconda3/python3.15_d.exe"
+      - "C:/Users/vaibh/miniconda3/python3.15_d"
+      - "C:/Users/vaibh/miniconda3/python3.14_d.com"
+      - "C:/Users/vaibh/miniconda3/python3.14_d.exe"
+      - "C:/Users/vaibh/miniconda3/python3.14_d"
+      - "C:/Users/vaibh/miniconda3/python3.13_d.com"
+      - "C:/Users/vaibh/miniconda3/python3.13_d.exe"
+      - "C:/Users/vaibh/miniconda3/python3.13_d"
+      - "C:/Users/vaibh/miniconda3/python3.12_d.com"
+      - "C:/Users/vaibh/miniconda3/python3.12_d.exe"
+      - "C:/Users/vaibh/miniconda3/python3.12_d"
+      - "C:/Users/vaibh/miniconda3/python3.11_d.com"
+      - "C:/Users/vaibh/miniconda3/python3.11_d.exe"
+      - "C:/Users/vaibh/miniconda3/python3.11_d"
+      - "C:/Users/vaibh/miniconda3/python3.10_d.com"
+      - "C:/Users/vaibh/miniconda3/python3.10_d.exe"
+      - "C:/Users/vaibh/miniconda3/python3.10_d"
+      - "C:/Users/vaibh/miniconda3/python3.9_d.com"
+      - "C:/Users/vaibh/miniconda3/python3.9_d.exe"
+      - "C:/Users/vaibh/miniconda3/python3.9_d"
+      - "C:/Users/vaibh/miniconda3/python3.8_d.com"
+      - "C:/Users/vaibh/miniconda3/python3.8_d.exe"
+      - "C:/Users/vaibh/miniconda3/python3.8_d"
+      - "C:/Users/vaibh/miniconda3/python3_d.com"
+      - "C:/Users/vaibh/miniconda3/python3_d.exe"
+      - "C:/Users/vaibh/miniconda3/python3_d"
+      - "C:/Users/vaibh/miniconda3/python_d.com"
+      - "C:/Users/vaibh/miniconda3/python_d.exe"
+      - "C:/Users/vaibh/miniconda3/python_d"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "C:\\Users\\vaibh\\miniconda3"
+        - "C:\\Users\\vaibh\\miniconda3\\Library\\mingw-w64\\bin"
+        - "C:\\Users\\vaibh\\miniconda3\\Library\\usr\\bin"
+        - "C:\\Users\\vaibh\\miniconda3\\Library\\bin"
+        - "C:\\Users\\vaibh\\miniconda3\\Scripts"
+        - "C:\\Users\\vaibh\\miniconda3\\bin"
+        - "C:\\Users\\vaibh\\miniconda3\\condabin"
+        - "C:\\Python314\\Scripts"
+        - "C:\\Python314"
+        - "C:\\Windows\\system32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\Wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0"
+        - "C:\\Windows\\System32\\OpenSSH"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\GnuWin32\\bin"
+        - "C:\\Dev-Cpp\\TDM-GCC-64\\bin"
+        - "C:\\Program Files\\cursor\\resources\\app\\bin"
+        - "C:\\Program Files\\nodejs"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:\\Program Files\\R\\R-4.5.1\\bin"
+        - "C:\\Program Files\\R\\R-4.5.1\\bin\\x64"
+        - "."
+        - "C:\\Program Files\\Docker\\Docker\\resources\\bin"
+        - "C:\\Program Files\\dotnet"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\vaibh\\miniconda3"
+        - "C:\\Users\\vaibh\\miniconda3\\Library\\mingw-w64\\bin"
+        - "C:\\Users\\vaibh\\miniconda3\\Library\\usr\\bin"
+        - "C:\\Users\\vaibh\\miniconda3\\Library\\bin"
+        - "C:\\Users\\vaibh\\miniconda3\\Scripts"
+        - "C:\\Users\\vaibh\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\vaibh\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\vaibh\\AppData\\Local\\Programs\\Ollama"
+        - "C:\\Users\\vaibh\\AppData\\Roaming\\npm"
+        - "C:\\Users\\vaibh\\AppData\\Local\\Programs\\Zed\\bin"
+        - "C:\\Users\\vaibh\\.lmstudio\\bin"
+        - "C:\\Users\\vaibh\\AppData\\Local\\Programs\\cursor\\resources\\app\\bin"
+        - "c:\\Users\\vaibh\\.cursor\\extensions\\ms-python.debugpy-2026.6.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files/baba-is-auto"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/CMake"
+        - "C:/Program Files/baba-is-auto"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindPython/Support.cmake:3519 (find_library)"
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindPython.cmake:700 (include)"
+      - "Libraries/pybind11/tools/pybind11NewTools.cmake:54 (find_package)"
+      - "Libraries/pybind11/tools/pybind11Common.cmake:215 (include)"
+      - "Libraries/pybind11/CMakeLists.txt:298 (include)"
+    mode: "library"
+    variable: "_Python_LIBRARY_DEBUG"
+    description: "Path to a library."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "python313_d"
+    candidate_directories:
+      - "C:/Users/vaibh/miniconda3/libs/"
+    searched_directories:
+      - "C:/Users/vaibh/miniconda3/libs/"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "C:\\Users\\vaibh\\miniconda3"
+        - "C:\\Users\\vaibh\\miniconda3\\Library\\mingw-w64\\bin"
+        - "C:\\Users\\vaibh\\miniconda3\\Library\\usr\\bin"
+        - "C:\\Users\\vaibh\\miniconda3\\Library\\bin"
+        - "C:\\Users\\vaibh\\miniconda3\\Scripts"
+        - "C:\\Users\\vaibh\\miniconda3\\bin"
+        - "C:\\Users\\vaibh\\miniconda3\\condabin"
+        - "C:\\Python314\\Scripts"
+        - "C:\\Python314"
+        - "C:\\Windows\\system32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\Wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0"
+        - "C:\\Windows\\System32\\OpenSSH"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\GnuWin32\\bin"
+        - "C:\\Dev-Cpp\\TDM-GCC-64\\bin"
+        - "C:\\Program Files\\cursor\\resources\\app\\bin"
+        - "C:\\Program Files\\nodejs"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:\\Program Files\\R\\R-4.5.1\\bin"
+        - "C:\\Program Files\\R\\R-4.5.1\\bin\\x64"
+        - "."
+        - "C:\\Program Files\\Docker\\Docker\\resources\\bin"
+        - "C:\\Program Files\\dotnet"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\vaibh\\miniconda3"
+        - "C:\\Users\\vaibh\\miniconda3\\Library\\mingw-w64\\bin"
+        - "C:\\Users\\vaibh\\miniconda3\\Library\\usr\\bin"
+        - "C:\\Users\\vaibh\\miniconda3\\Library\\bin"
+        - "C:\\Users\\vaibh\\miniconda3\\Scripts"
+        - "C:\\Users\\vaibh\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\vaibh\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\vaibh\\AppData\\Local\\Programs\\Ollama"
+        - "C:\\Users\\vaibh\\AppData\\Roaming\\npm"
+        - "C:\\Users\\vaibh\\AppData\\Local\\Programs\\Zed\\bin"
+        - "C:\\Users\\vaibh\\.lmstudio\\bin"
+        - "C:\\Users\\vaibh\\AppData\\Local\\Programs\\cursor\\resources\\app\\bin"
+        - "c:\\Users\\vaibh\\.cursor\\extensions\\ms-python.debugpy-2026.6.0-win32-x64\\bundled\\scripts\\noConfigScripts"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files/baba-is-auto"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/CMake"
+        - "C:/Program Files/baba-is-auto"
+      CMAKE_SYSTEM_LIBRARY_PATH:
+        - "C:/Program Files/baba-is-auto/bin"
+        - "C:/Program Files/CMake/bin"
+        - "/bin"
+...

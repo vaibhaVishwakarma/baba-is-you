@@ -7,7 +7,3 @@
 
 # OSX files
 .DS_Store
-
-# Python files
-*.pyc
-/.pytest_cache

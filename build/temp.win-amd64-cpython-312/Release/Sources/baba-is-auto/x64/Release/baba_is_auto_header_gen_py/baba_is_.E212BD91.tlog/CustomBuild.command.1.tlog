@@ -1,0 +1,28 @@
+^C:\USERS\VAIBH\ONEDRIVE\DOCUMENTS\FUNCTIONAL\BABA-IS-YOU\BABA-IS-AUTO\BUILD\TEMP.WIN-AMD64-CPYTHON-312\RELEASE\CMAKEFILES\7D55B7FC202943C0A47ACC7FCEE28E0A\BABA-IS-AUTO.HPP.RULE
+setlocal
+python C:/Users/vaibh/OneDrive/Documents/Functional/baba-is-you/baba-is-auto/Sources/baba-is-auto/../../Scripts/header_gen.py
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\VAIBH\ONEDRIVE\DOCUMENTS\FUNCTIONAL\BABA-IS-YOU\BABA-IS-AUTO\BUILD\TEMP.WIN-AMD64-CPYTHON-312\RELEASE\CMAKEFILES\5A2523E9B4FD7EB262747D6A9116A0B9\BABA_IS_AUTO_HEADER_GEN_PY.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\VAIBH\ONEDRIVE\DOCUMENTS\FUNCTIONAL\BABA-IS-YOU\BABA-IS-AUTO\SOURCES\BABA-IS-AUTO\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/vaibh/OneDrive/Documents/Functional/baba-is-you/baba-is-auto -BC:/Users/vaibh/OneDrive/Documents/Functional/baba-is-you/baba-is-auto/build/temp.win-amd64-cpython-312/Release --check-stamp-file C:/Users/vaibh/OneDrive/Documents/Functional/baba-is-you/baba-is-auto/build/temp.win-amd64-cpython-312/Release/Sources/baba-is-auto/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

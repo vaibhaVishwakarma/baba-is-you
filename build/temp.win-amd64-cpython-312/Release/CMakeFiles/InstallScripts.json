@@ -1,0 +1,12 @@
+{
+	"InstallScripts" : 
+	[
+		"C:/Users/vaibh/OneDrive/Documents/Functional/baba-is-you/baba-is-auto/build/temp.win-amd64-cpython-312/Release/cmake_install.cmake",
+		"C:/Users/vaibh/OneDrive/Documents/Functional/baba-is-you/baba-is-auto/build/temp.win-amd64-cpython-312/Release/Libraries/doctest/cmake_install.cmake",
+		"C:/Users/vaibh/OneDrive/Documents/Functional/baba-is-you/baba-is-auto/build/temp.win-amd64-cpython-312/Release/Sources/baba-is-auto/cmake_install.cmake",
+		"C:/Users/vaibh/OneDrive/Documents/Functional/baba-is-you/baba-is-auto/build/temp.win-amd64-cpython-312/Release/Tests/UnitTests/cmake_install.cmake",
+		"C:/Users/vaibh/OneDrive/Documents/Functional/baba-is-you/baba-is-auto/build/temp.win-amd64-cpython-312/Release/Libraries/pybind11/cmake_install.cmake",
+		"C:/Users/vaibh/OneDrive/Documents/Functional/baba-is-you/baba-is-auto/build/temp.win-amd64-cpython-312/Release/Extensions/BabaPython/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
