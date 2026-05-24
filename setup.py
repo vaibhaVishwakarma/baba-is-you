@@ -8,7 +8,7 @@ import platform
 import subprocess
 import multiprocessing
 
-from setuptools import setup, Extension, find_packages
+from setuptools import setup, Extension
 from setuptools.command.build_ext import build_ext
 from distutils.version import LooseVersion
 
@@ -51,7 +51,7 @@ class CMakeBuild(build_ext):
                 '-DCMAKE_LIBRARY_OUTPUT_DIRECTORY_{}={}'.format(cfg.upper(), extdir)]
             if sys.maxsize > 2**32:
                 cmake_args += ['-A', 'x64']
-            build_args += ['--', '/m']
+            build_args += ['--target', 'pyBaba', '--', '/m']
         else:
             cmake_args += ['-DCMAKE_BUILD_TYPE=' + cfg]
             num_jobs = env.get('NUM_JOBS', multiprocessing.cpu_count())
@@ -74,9 +74,6 @@ setup(
     author_email='utilforever@gmail.com',
     description='Baba Is You simulator with some reinforcement learning',
     long_description='',
-    packages=find_packages(
-        include=['baba_graph', 'baba_graph.*', 'baba_world', 'baba_world.*'],
-    ),
     ext_modules=[CMakeExtension('pyBaba')],
     cmdclass=dict(build_ext=CMakeBuild),
     zip_safe=False,

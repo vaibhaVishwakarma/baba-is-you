@@ -14,6 +14,14 @@ from baba_graph.perception.types import PerceptionSnapshot
 from baba_graph.predictor.model import BabaTransitionModel
 from baba_graph.predictor.movement import apply_adjacency
 from baba_graph.world_model.model import snapshot_to_tensors
+from baba_world.actions import decode_action
+from baba_world.paths import map_path
+
+
+def _filter_you_cells(positions: list[tuple[int, int]]) -> list[tuple[int, int]]:
+    """Drop padding ghost at (0, 0) when real YOU cells exist elsewhere."""
+    real = [p for p in positions if p != (0, 0)]
+    return real if real else list(positions)
 
 
 def _min_manhattan(src: tuple[int, int], targets: list[tuple[int, int]]) -> float:
@@ -56,43 +64,82 @@ def score_predicted_state(
     with torch.no_grad():
         out = model(snap_tensors, action)
 
-    win_cells = win_positions(snap)
-    pred_you = _predicted_you_positions(
-        snap, out.movement_logits.argmax(dim=-1).cpu().tolist()
+    win_cells = _filter_you_cells(win_positions(snap))
+    pred_you = _filter_you_cells(
+        _predicted_you_positions(
+            snap, out.movement_logits.argmax(dim=-1).cpu().tolist()
+        )
     )
     if not pred_you:
         return -1e6
     if not win_cells:
+        # No WIN in rules yet (common on puzzle maps) — nudge toward text for rule edits.
+        text_cells = [(n.x, n.y) for n in snap.text.nodes]
+        if text_cells:
+            return -sum(_min_manhattan(p, text_cells) for p in pred_you) / len(pred_you)
         return -1e3
 
     total = sum(_min_manhattan(p, win_cells) for p in pred_you)
     return -total / len(pred_you)
 
 
+def _you_moves_in_simulator(
+    map_key: str,
+    history: list[int],
+    action: int,
+) -> bool:
+    """True if this action changes YOU cells in the real simulator (not just the model)."""
+    game = pyBaba.Game(str(map_path(map_key)))
+    game.Reset()
+    for a in history:
+        game.MovePlayer(decode_action(a))
+    before = _filter_you_cells(
+        you_positions(extract_perception_from_game(game, calibrate_classifier=False))
+    )
+    game.MovePlayer(decode_action(action))
+    after = _filter_you_cells(
+        you_positions(extract_perception_from_game(game, calibrate_classifier=False))
+    )
+    return before != after
+
+
 def choose_action_lookahead(
     game: pyBaba.Game,
     model: BabaTransitionModel,
     *,
+    map_key: str = "",
+    history: list[int] | None = None,
     codebook_size: int | None = None,
     device: str = "cpu",
 ) -> int:
     """Pick action 0–3 via one-step model lookahead on (state, action) pairs."""
     cb = codebook_size or model.world_config.codebook_size
 
-    best_action = 0
-    best_score = -1e9
     snap = extract_perception_from_game(game, calibrate_classifier=False)
     base_tensors = snapshot_to_tensors(snap, device=device, codebook_size=cb)
 
+    scored: list[tuple[float, int]] = []
     for action in range(4):
         score = score_predicted_state(
             model, snap, base_tensors, action, device=device
         )
-        if score > best_score:
-            best_score = score
-            best_action = action
+        scored.append((score, action))
 
-    return best_action
+    best_score = max(s for s, _ in scored)
+    candidates = [a for s, a in scored if s >= best_score - 1e-5]
+    if len(candidates) == 1:
+        return candidates[0]
+
+    # Model ties (often STAY-heavy on unseen maps): prefer a move that actually shifts YOU.
+    if map_key and history is not None:
+        for action in candidates:
+            if _you_moves_in_simulator(map_key, history, action):
+                return action
+        for action in range(4):
+            if action not in candidates and _you_moves_in_simulator(map_key, history, action):
+                return action
+
+    return candidates[0]
 
 
 def replay_and_choose(
@@ -113,6 +160,8 @@ def replay_and_choose(
     return choose_action_lookahead(
         game,
         model,
+        map_key=map_key,
+        history=action_history,
         codebook_size=model.world_config.codebook_size,
         device=device,
     )

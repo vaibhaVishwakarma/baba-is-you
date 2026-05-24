@@ -31,6 +31,7 @@ def map_path(name: str) -> Path:
 SUPPORTED_MAPS = (
     "baba_is_you",
     "out_of_reach",
+    "volcano",
     "simple_map",
     "off_limits",
     "off_limits_bug",

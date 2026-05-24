@@ -112,15 +112,30 @@ def main() -> int:
 
     model: BabaTransitionModel | None = None
     if args.mode == "agent":
-        model = BabaTransitionModel(WorldModelConfig(), PredictorConfig())
-        if args.checkpoint:
-            import torch
+        import torch
 
+        wc, pc = WorldModelConfig(), PredictorConfig()
+        if args.checkpoint:
             ckpt = torch.load(args.checkpoint, map_location="cpu", weights_only=False)
+            if isinstance(ckpt, dict):
+                if "world_config" in ckpt:
+                    wc = ckpt["world_config"]
+                if "predictor_config" in ckpt:
+                    pc = ckpt["predictor_config"]
+            model = BabaTransitionModel(wc, pc)
             if isinstance(ckpt, dict) and "model" in ckpt:
                 model.load_state_dict(ckpt["model"])
             else:
                 model.load_state_dict(ckpt)
+            trained_on = ckpt.get("maps", "?") if isinstance(ckpt, dict) else "?"
+            print(f"Loaded checkpoint (trained on: {trained_on})", flush=True)
+        else:
+            model = BabaTransitionModel(wc, pc)
+            print(
+                "WARNING: agent mode without --checkpoint uses random weights; "
+                "Baba will not move meaningfully on hard maps.",
+                flush=True,
+            )
         model.eval()
 
     history: list[int] = []

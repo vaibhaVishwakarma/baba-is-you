@@ -17,8 +17,10 @@ from baba_graph.device import (
     resolve_device,
     t4_grad_accum,
 )
+import torch
+
 from baba_graph.predictor import BabaTransitionModel, PredictorConfig, train_predictor
-from baba_graph.predictor.data import collect_tokenized_transitions
+from baba_graph.predictor.data import collect_multi_map, collect_tokenized_transitions
 from baba_graph.vq.train import load_quantizer
 from baba_graph.world_model import WorldModelConfig
 
@@ -26,6 +28,16 @@ from baba_graph.world_model import WorldModelConfig
 def main() -> int:
     parser = argparse.ArgumentParser(description="Train Phase 4 transition predictor")
     parser.add_argument("--map", default="baba_is_you")
+    parser.add_argument(
+        "--maps",
+        default="",
+        help="Comma-separated maps for multi-map training (overrides --map)",
+    )
+    parser.add_argument(
+        "--output",
+        default="checkpoints/predictor.pt",
+        help="Save model state_dict after training",
+    )
     parser.add_argument("--episodes", type=int, default=30)
     parser.add_argument("--max-steps", type=int, default=150)
     parser.add_argument("--epochs", type=int, default=10)
@@ -61,12 +73,21 @@ def main() -> int:
     if args.vq_checkpoint:
         quantizer = load_quantizer(args.vq_checkpoint, device=device)
 
-    print(f"Collecting transitions: {args.map}", flush=True)
-    transitions = collect_tokenized_transitions(
-        args.map,
-        episodes=args.episodes,
-        max_steps=args.max_steps,
-    )
+    if args.maps.strip():
+        map_list = [m.strip() for m in args.maps.split(",") if m.strip()]
+        print(f"Collecting transitions: {', '.join(map_list)}", flush=True)
+        transitions = collect_multi_map(
+            map_list,
+            episodes=args.episodes,
+            max_steps=args.max_steps,
+        )
+    else:
+        print(f"Collecting transitions: {args.map}", flush=True)
+        transitions = collect_tokenized_transitions(
+            args.map,
+            episodes=args.episodes,
+            max_steps=args.max_steps,
+        )
     rule_changes = sum(1 for t in transitions if t.rules_before != t.rules_after)
     print(
         f"{len(transitions)} transitions, {rule_changes} rule mutations",
@@ -94,6 +115,21 @@ def main() -> int:
             f"mov_acc={last.movement_accuracy:.2%} pairs={last.num_pairs}",
             flush=True,
         )
+
+    if args.output:
+        out_path = Path(args.output)
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        torch.save(
+            {
+                "model": model.state_dict(),
+                "world_config": wc,
+                "predictor_config": pc,
+                "maps": args.maps.strip() or args.map,
+            },
+            out_path,
+        )
+        print(f"Saved checkpoint: {out_path.resolve()}", flush=True)
+
     return 0
 
 
