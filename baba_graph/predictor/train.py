@@ -39,6 +39,17 @@ def _autocast_ctx(device: str, use_amp: bool):
     return nullcontext()
 
 
+def _gather_token_ids(
+    tokens: np.ndarray | torch.Tensor,
+    indices: torch.Tensor,
+    device: torch.device,
+) -> torch.Tensor:
+    """Index token ids on ``device``; safe when ``indices`` is CUDA."""
+    if isinstance(tokens, torch.Tensor):
+        return tokens.to(device=device, dtype=torch.long)[indices]
+    return torch.as_tensor(tokens, device=device, dtype=torch.long)[indices]
+
+
 def transition_loss(
     model: BabaTransitionModel,
     transition: DynamicsTransition,
@@ -88,7 +99,7 @@ def transition_loss(
         next_idx = torch.tensor([p[1] for p in pairs], device=dev, dtype=torch.long)
 
         id_logits = out.identity_logits[prev_idx]
-        id_targets = torch.from_numpy(next_phys_tok[next_idx]).long().to(dev)
+        id_targets = _gather_token_ids(next_phys_tok, next_idx, dev)
         loss_id = F.cross_entropy(
             id_logits,
             id_targets,
