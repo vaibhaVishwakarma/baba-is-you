@@ -51,7 +51,7 @@ class CMakeBuild(build_ext):
                 '-DCMAKE_LIBRARY_OUTPUT_DIRECTORY_{}={}'.format(cfg.upper(), extdir)]
             if sys.maxsize > 2**32:
                 cmake_args += ['-A', 'x64']
-            build_args += ['--', '/m']
+            build_args += ['--target', 'pyBaba', '--', '/m']
         else:
             cmake_args += ['-DCMAKE_BUILD_TYPE=' + cfg]
             num_jobs = env.get('NUM_JOBS', multiprocessing.cpu_count())

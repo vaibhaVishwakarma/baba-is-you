@@ -83,10 +83,10 @@ def test_transition_loss_cuda():
         WorldModelConfig(hidden_dim=32, codebook_size=64, rule_layers=1, physical_layers=1),
         PredictorConfig(codebook_size=64),
     ).cuda()
-    loss, metrics = transition_loss(model, tr[0], device="cuda")
+    loss, metrics = transition_loss(model, tr[0], device="cuda", use_amp=True)
     assert loss.device.type == "cuda"
     assert torch.isfinite(loss)
-    assert metrics["num_pairs"] >= 0
+    assert metrics["num_pairs"] > 0, "need aligned pairs to exercise CUDA target gather"
 
 
 def test_train_one_epoch():
