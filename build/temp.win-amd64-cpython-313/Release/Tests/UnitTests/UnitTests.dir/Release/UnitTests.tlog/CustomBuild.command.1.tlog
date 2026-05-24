@@ -1,0 +1,10 @@
+^C:\USERS\VAIBH\ONEDRIVE\DOCUMENTS\FUNCTIONAL\BABA-IS-YOU\BABA-IS-AUTO\TESTS\UNITTESTS\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/vaibh/OneDrive/Documents/Functional/baba-is-you/baba-is-auto -BC:/Users/vaibh/OneDrive/Documents/Functional/baba-is-you/baba-is-auto/build/temp.win-amd64-cpython-313/Release --check-stamp-file C:/Users/vaibh/OneDrive/Documents/Functional/baba-is-you/baba-is-auto/build/temp.win-amd64-cpython-313/Release/Tests/UnitTests/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\vaibh\OneDrive\Documents\Functional\baba-is-you\baba-is-auto\build\temp.win-amd64-cpython-311\Release\CMakeFiles\7d55b7fc202943c0a47acc7fcee28e0a\baba-is-auto.hpp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\vaibh\OneDrive\Documents\Functional\baba-is-you\baba-is-auto\build\temp.win-amd64-cpython-311\Release\CMakeFiles\9eb3100ff618a3b59fe467841b2d4f3d\baba_is_auto_header_gen_py.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\vaibh\OneDrive\Documents\Functional\baba-is-you\baba-is-auto\Sources\baba-is-auto\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\vaibh\OneDrive\Documents\Functional\baba-is-you\baba-is-auto\build\temp.win-amd64-cpython-311\Release\Sources\baba-is-auto\CMakeFiles\baba_is_auto_header_gen_py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{A7A149FC-B872-38B8-A7AA-B12DE2EFC7EA}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\vaibh\OneDrive\Documents\Functional\baba-is-you\baba-is-auto\Tests\UnitTests\UnitTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\vaibh\OneDrive\Documents\Functional\baba-is-you\baba-is-auto\Tests\UnitTests\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{FB5D2B61-4648-3AC4-B8B6-992EDFF78940}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

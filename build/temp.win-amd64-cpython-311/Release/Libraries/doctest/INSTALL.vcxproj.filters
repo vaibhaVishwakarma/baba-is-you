@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\vaibh\OneDrive\Documents\Functional\baba-is-you\baba-is-auto\build\temp.win-amd64-cpython-311\Release\CMakeFiles\c0e1df6fc6e4f9c864a9c8a3af6565d2\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{A7A149FC-B872-38B8-A7AA-B12DE2EFC7EA}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
