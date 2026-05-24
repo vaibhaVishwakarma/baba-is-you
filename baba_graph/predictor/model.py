@@ -7,7 +7,7 @@ from dataclasses import dataclass
 import torch
 import torch.nn as nn
 
-from baba_graph.device import action_tensor
+from baba_graph.device import action_tensor, snap_tensors_to_device
 from baba_graph.predictor.config import PredictorConfig
 from baba_graph.predictor.head import DualHeadOutput, DualTransitionPredictorHead
 from baba_graph.world_model.config import WorldModelConfig
@@ -51,6 +51,7 @@ class BabaTransitionModel(nn.Module):
         snap_tensors: dict,
         action: torch.Tensor | int,
     ) -> PredictorOutput:
+        snap_tensors = snap_tensors_to_device(snap_tensors, self)
         action = action_tensor(action, self)
         dyn = self.dynamics.from_snapshot_tensors(snap_tensors, action)
         heads = self.predictor(dyn.physical_h)

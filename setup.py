@@ -8,7 +8,7 @@ import platform
 import subprocess
 import multiprocessing
 
-from setuptools import setup, Extension
+from setuptools import setup, Extension, find_packages
 from setuptools.command.build_ext import build_ext
 from distutils.version import LooseVersion
 
@@ -74,6 +74,9 @@ setup(
     author_email='utilforever@gmail.com',
     description='Baba Is You simulator with some reinforcement learning',
     long_description='',
+    packages=find_packages(
+        include=['baba_graph', 'baba_graph.*', 'baba_world', 'baba_world.*'],
+    ),
     ext_modules=[CMakeExtension('pyBaba')],
     cmdclass=dict(build_ext=CMakeBuild),
     zip_safe=False,

@@ -9,7 +9,12 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 
-from baba_graph.device import action_tensor, is_cuda_device, module_device
+from baba_graph.device import (
+    action_tensor,
+    is_cuda_device,
+    module_device,
+    snap_tensors_to_device,
+)
 from baba_graph.predictor.align import align_nodes_hungarian
 from baba_graph.predictor.model import BabaTransitionModel
 from baba_graph.predictor.movement import movement_labels_for_pairs
@@ -46,11 +51,14 @@ def transition_loss(
     dev = module_device(model)
     device_str = str(dev)
     cb = model.world_config.codebook_size
-    s = snapshot_to_tensors(
-        transition.state,
-        device=device_str,
-        codebook_size=cb,
-        quantizer=quantizer,
+    s = snap_tensors_to_device(
+        snapshot_to_tensors(
+            transition.state,
+            device=dev,
+            codebook_size=cb,
+            quantizer=quantizer,
+        ),
+        dev,
     )
     _, next_phys_tok = snapshot_token_ids(
         transition.next_state,
