@@ -1,2 +1,3 @@
 pytest
 wheel
+numpy>=1.20
