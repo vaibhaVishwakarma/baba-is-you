@@ -1,3 +1,45 @@
+# installlation
+
+
+``` bash
+
+rm Libraries
+
+unzip Libraries.zip
+
+mkdir build 
+
+cd build
+
+cmake ..
+
+make
+
+cd ..
+
+pip install -U .
+
+pip install -r requirements.txt
+
+```
+---
+```bash
+python Scripts/train_predictor.py \
+  --maps baba_is_you,out_of_reach,volcano \
+  --epochs 30 --episodes 20 --max-steps 200 \
+  --device auto \
+  --output checkpoints/predictor_multi.pt
+
+
+python Scripts/play_gui.py --map out_of_reach --mode agent \
+  --checkpoint checkpoints/predictor_multi.pt
+
+python Scripts/play_gui.py --map volcano --mode agent \
+  --checkpoint checkpoints/predictor_multi.pt
+
+```
+---
+
 # baba-is-auto
 
 <img src="./Medias/Logos/Logo.png" width=256 height=256 />
